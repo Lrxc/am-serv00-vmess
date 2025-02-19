@@ -13,8 +13,9 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install SSH client
-        run: sudo apt-get install -y openssh-client
+        run: sudo apt-get install -y openssh-client sshpass
 
       - name: SSH to remote server
         run: |
-          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "echo '成功连接到远程服务器'"
+          sshpass -p ${{ secrets.SSH_PRIVATE_KEY }} ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}
+          "echo '成功连接到远程服务器'"
