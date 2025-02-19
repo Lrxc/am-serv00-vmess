@@ -18,4 +18,4 @@ jobs:
       - name: SSH to remote server
         run: |
           sshpass -p ${{ secrets.SSH_PRIVATE_KEY }} ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}
-          "echo '成功连接到远程服务器'"
+          echo '成功连接到远程服务器'
