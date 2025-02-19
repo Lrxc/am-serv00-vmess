@@ -1,0 +1,20 @@
+name: SSH Connection Job
+
+on:
+  schedule:
+    - cron: '*/1 * * * *'
+
+jobs:
+  ssh-connect:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install SSH client
+        run: sudo apt-get install -y openssh-client
+
+      - name: SSH to remote server
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "echo '成功连接到远程服务器'"
